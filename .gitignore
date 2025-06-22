@@ -92,4 +92,7 @@ bld/
 
 # System files
 .DS_Store
-Thumbs.db
+Thumbs.dbappsettings.json 
+appsettings.*.json 
+appsettings.Local.json 
+appsettings.Development.json 

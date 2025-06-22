@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PersonalData.Application.Commands;
 using PersonalData.Domain.Interfaces;
 using PersonalData.Infrastructure.Repositories;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,47 @@ builder.Services.AddControllers()
     });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var useInMemoryDb = false;
+
+if (!string.IsNullOrEmpty(connectionString))
+{
+    try
+    {
+        using var connection = new SqlConnection(connectionString);
+        await connection.OpenAsync();
+        await connection.CloseAsync();
+
+        Console.WriteLine("SQL Server connection successful");
+
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        {
+            options.UseSqlServer(connectionString);
+        });
+    }
+    catch (Exception ex)
+    {
+        useInMemoryDb = true;
+        Console.WriteLine($"SQL Server connection failed: {ex.Message}");
+        Console.WriteLine("Using In-Memory database instead");
+
+        // Fallback to In-Memory
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        {
+            options.UseInMemoryDatabase("PersonalDataDB");
+        });
+    }
+}
+else
+{
+    useInMemoryDb = true;
+    Console.WriteLine("No connection string found - using In-Memory database");
+
+    // Default to In-Memory
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    {
+        options.UseInMemoryDatabase("PersonalDataDB");
+    });
+}
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {

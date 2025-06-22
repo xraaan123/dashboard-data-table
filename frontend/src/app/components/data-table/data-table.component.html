@@ -1,0 +1,112 @@
+<div class="container-fluid p-0">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2 class="mb-1 fw-medium">ข้อมูลบุคคล</h2>
+      <p class="text-muted mb-0 small">จัดการข้อมูลส่วนบุคคล</p>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <div>
+        <mat-form-field appearance="fill" style="width: 300px">
+          <mat-label>Search</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Search data..."
+            #input
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-raised-button color="primary" (click)="addRecord()" class="d-flex align-items-center gap-2">
+        <mat-icon>add</mat-icon>
+        <span>Add Data</span>
+      </button>
+      </div>
+    </div>
+  </div>
+   
+  <div
+    *ngIf="isLoading"
+    class="d-flex flex-column align-items-center justify-content-center"
+    style="height: 300px"
+  >
+    <mat-spinner class="mb-3"></mat-spinner>
+    <p class="text-muted mb-0">กำลังโหลดข้อมูล</p>
+  </div>
+
+  <div *ngIf="!isLoading" class="bg-white rounded shadow-sm overflow-hidden">
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" matSort class="w-100">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-light fw-semibold">ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-light fw-semibold">ชื่อ-สกุล</th>
+          <td mat-cell *matCellDef="let element">
+            <span>{{ element.fullName }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-light fw-semibold">ที่อยู่</th>
+          <td mat-cell *matCellDef="let element" style="min-width: 250px; max-width: 300px;">
+            <div class="text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              {{ element.address }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="birthDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-light fw-semibold">วันเกิด</th>
+          <td mat-cell *matCellDef="let element">
+            <span>{{ element.birthDate | date : "dd/MM/yyyy" }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="age">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-light fw-semibold text-center" style="width: 80px;">อายุ</th>
+          <td mat-cell *matCellDef="let element">
+            <span>{{ element.age }} ปี</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="bg-light fw-semibold text-center position-sticky" style="right: 0; width: 120px; z-index: 2; box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);"></th>
+          <td mat-cell *matCellDef="let element" class="text-center position-sticky bg-white" style="right: 0; z-index: 1; box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);">
+            <button mat-icon-button [matMenuTriggerFor]="actionMenu" class="text-muted">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu #actionMenu="matMenu">
+                <button mat-menu-item (click)="viewRecord(element)">
+                    <mat-icon class="me-2">visibility</mat-icon>
+                    <span>View</span>
+                </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="border-bottom" style="transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f8f9fa'" onmouseout="this.style.backgroundColor='white'"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell text-center py-5" [attr.colspan]="displayedColumns.length">
+            <div class="d-flex flex-column align-items-center text-muted">
+              <mat-icon class="mb-2 opacity-50" style="font-size: 48px; width: 48px; height: 48px;">inbox</mat-icon>
+              <p class="mb-0 fst-italic">ไม่พบข้อมูลที่ตรงกับ "{{ input.value }}"</p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <mat-paginator #paginator [length]="totalCount" [pageSize]="pageSize" [pageIndex]="pageNumber - 1" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)" showFirstLastButtons aria-label="เลือกหน้าข้อมูล" class="border-top"></mat-paginator>
+  </div>
+</div>

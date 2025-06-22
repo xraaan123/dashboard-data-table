@@ -1,0 +1,153 @@
+<div class="container-fluid p-0">
+  <div
+    class="d-flex justify-content-between align-items-center p-3 border-bottom mb-3"
+  >
+    <h2
+      class="d-flex align-items-center gap-2 mb-0 fs-5 fw-medium text-dark"
+      mat-dialog-title
+    >
+      <mat-icon class="text-primary">{{
+        isView ? "visibility" : "add"
+      }}</mat-icon>
+      {{ isView ? "ดูข้อมูล" : "เพิ่มข้อมูลใหม่" }}
+    </h2>
+  </div>
+
+  <div
+    mat-dialog-content
+    class="px-3"
+    style="min-height: 400px; overflow-y: auto"
+  >
+    <form [formGroup]="dataForm">
+      <div class="row mb-3">
+        <div class="col-12">
+          <label class="form-label fw-semibold mb-2">ชื่อ - สกุล</label>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <!-- <mat-label>ชื่อ</mat-label> -->
+            <input
+              matInput
+              formControlName="firstName"
+              placeholder="กรอกชื่อ"
+              maxlength="50"
+              [readonly]="isView"
+            />
+            <mat-error
+              *ngIf="hasError('firstName', 'required') && !isView"
+              class="small text-danger"
+            >
+              {{ getErrorMessage("firstName") }}
+            </mat-error>
+            <mat-error
+              *ngIf="hasError('firstName', 'minlength') && !isView"
+              class="small text-danger"
+            >
+              {{ getErrorMessage("firstName") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <!-- <mat-label>นามสกุล</mat-label> -->
+            <input
+              matInput
+              formControlName="lastName"
+              placeholder="กรอกนามสกุล"
+              maxlength="50"
+              [readonly]="isView"
+            />
+            <mat-error
+              *ngIf="hasError('lastName', 'required') && !isView"
+              class="small text-danger"
+            >
+              {{ getErrorMessage("lastName") }}
+            </mat-error>
+            <mat-error
+              *ngIf="hasError('lastName', 'minlength') && !isView"
+              class="small text-danger"
+            >
+              {{ getErrorMessage("lastName") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label class="form-label fw-semibold mb-2">วันเกิด</label>
+          <mat-form-field class="w-100" appearance="fill">
+            <!-- <mat-label>วันเกิด</mat-label> -->
+            <input matInput [matDatepicker]="picker" formControlName="birthDate"  placeholder="เลือกวันที่">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-2">
+          <label class="form-label fw-semibold mb-2">อายุ</label>
+          <mat-form-field appearance="fill" class="w-100">
+            <input matInput [value]="getDisplayAge() + ' ปี'" readonly />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-12">
+          <label class="form-label fw-semibold mb-2">ที่อยู่</label>
+          <mat-form-field appearance="fill" class="w-100">
+            <!-- <mat-label>กรอกที่อยู่</mat-label> -->
+            <textarea
+              matInput
+              formControlName="address"
+              placeholder="กรอกที่อยู่อย่างละเอียด"
+              rows="4"
+              maxlength="500"
+              [readonly]="isView"
+              style="resize: vertical; min-height: 80px"
+            ></textarea>
+            <mat-error
+              *ngIf="hasError('address', 'required') && !isView"
+              class="small text-danger"
+            >
+              {{ getErrorMessage("address") }}
+            </mat-error>
+            <mat-error
+              *ngIf="hasError('address', 'minlength') && !isView"
+              class="small text-danger"
+            >
+              {{ getErrorMessage("address") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div
+    mat-dialog-actions
+    class="d-flex justify-content-end gap-2 p-3 border-top bg-light"
+  >
+    <button
+      mat-button
+      (click)="onCancel()"
+      class="d-flex align-items-center gap-2 text-muted px-3"
+    >
+      <mat-icon style="font-size: 18px; width: 18px; height: 18px"
+        >close</mat-icon
+      >
+      <span>{{ isView ? "ปิด" : "ยกเลิก" }}</span>
+    </button>
+    <button
+      *ngIf="!isView"
+      mat-raised-button
+      color="primary"
+      (click)="onSave()"
+      [disabled]="dataForm.invalid"
+      class="d-flex align-items-center gap-2 px-3"
+    >
+      <mat-icon style="font-size: 18px; width: 18px; height: 18px">add</mat-icon>
+      <span>เพิ่มข้อมูล</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+// Minimal custom styles - most styling is handled by Bootstrap classes
+
+// Ensure Material form fields take full width
+.mat-form-field {
+  width: 100% !important;
+
+  // Remove bottom margin for tighter layout
+  .mat-form-field-wrapper {
+    margin-bottom: 0.5em !important;
+  }
+}
+
+// Form label styling
+.form-label {
+  color: #495057;
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+}
+
+// Material icon sizing in buttons
+button mat-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+// Textarea specific styling
+textarea {
+  resize: vertical !important;
+  min-height: 80px !important;
+}
+
+// Error message styling
+.mat-error {
+  font-size: 12px !important;
+  color: #dc3545 !important;
+}
+
+// Disabled form styling for view mode
+.mat-form-field.mat-form-field-disabled {
+  .mat-form-field-label {
+    color: #6c757d !important;
+  }
+
+  .mat-form-field-infix {
+    background-color: #f8f9fa !important;
+  }
+}
+
+// Dialog actions background
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+  // Stack name fields vertically on mobile
+  .row .col-6 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .d-flex.justify-content-end {
+    flex-direction: column !important;
+
+    button {
+      width: 100% !important;
+      justify-content: center !important;
+      margin-bottom: 0.5rem !important;
+    }
+  }
+
+  .gap-2 {
+    gap: 0.75rem !important;
+  }
+}
+
+// Print styles
+@media print {
+  .border-top,
+  button {
+    display: none !important;
+  }
+}

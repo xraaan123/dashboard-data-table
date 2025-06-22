@@ -1,0 +1,302 @@
+// .data-table-wrapper {
+//   width: 100%;
+
+//   .table-header {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: flex-start;
+//     margin-bottom: 20px;
+//     gap: 20px;
+
+//     .table-title {
+//       h2 {
+//         margin: 0 0 5px 0;
+//         color: #333;
+//         font-weight: 500;
+//         font-family: "Sarabun", sans-serif;
+//       }
+
+//       .text-muted {
+//         margin: 0;
+//         color: #666;
+//         font-size: 14px;
+//         font-family: "Sarabun", sans-serif;
+//       }
+//     }
+
+//     .table-actions {
+//       display: flex;
+//       align-items: center;
+//       gap: 15px;
+
+//       .add-button {
+//         height: 56px;
+//         padding: 0 20px;
+//         margin-right: 15px;
+
+//         mat-icon {
+//           margin-right: 5px;
+//         }
+//       }
+
+//       .search-field {
+//         width: 300px;
+//       }
+//     }
+//   }
+
+//   .loading-container {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     height: 300px;
+
+//     mat-spinner {
+//       margin-bottom: 20px;
+//     }
+
+//     p {
+//       color: #666;
+//       margin: 0;
+//       font-family: "Sarabun", sans-serif;
+//     }
+//   }
+
+//   .table-container {
+//     background: white;
+//     border-radius: 8px;
+//     overflow: hidden;
+
+//     table {
+//       width: 100%;
+//       font-family: "Sarabun", sans-serif;
+
+//       th {
+//         font-weight: 600;
+//         font-size: 14px;
+//         background-color: #f8f9fa;
+//       }
+
+//       td {
+//         font-size: 14px;
+//       }
+
+//       .name-info {
+//         display: flex;
+//         align-items: center;
+//         gap: 8px;
+
+//         .person-icon {
+//           color: #666;
+//           font-size: 20px;
+//         }
+//       }
+
+//       .address-cell {
+//         max-width: 300px;
+
+//         .address-text {
+//           white-space: nowrap;
+//           overflow: hidden;
+//           text-overflow: ellipsis;
+//           cursor: pointer;
+
+//           &:hover {
+//             color: #1976d2;
+//           }
+//         }
+//       }
+
+//       .date-info {
+//         display: flex;
+//         align-items: center;
+//         gap: 8px;
+
+//         .date-icon {
+//           color: #ff9800;
+//           font-size: 18px;
+//         }
+//       }
+
+//       .age-column {
+//         width: 80px;
+//         max-width: 80px;
+//       }
+
+//       .actions-column {
+//         position: sticky;
+//         right: 0;
+//         width: 120px;
+//         min-width: 120px;
+//         text-align: center;
+//         border-left: 1px solid #e0e0e0;
+//         z-index: 1;
+
+//         box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+//       }
+
+//       .view-button {
+//         padding: 8px 16px;
+//         font-size: 12px;
+//         height: auto;
+//         line-height: 1.2;
+
+//         mat-icon {
+//           margin-right: 5px;
+//           font-size: 16px;
+//           width: 16px;
+//           height: 16px;
+//         }
+//       }
+
+//       .table-row {
+//         &:hover {
+//           background-color: #f5f5f5;
+//         }
+//       }
+
+//       .no-data {
+//         text-align: center;
+//         padding: 40px 20px;
+//         color: #666;
+
+//         mat-icon {
+//           font-size: 48px;
+//           width: 48px;
+//           height: 48px;
+//           margin-bottom: 10px;
+//           opacity: 0.5;
+//         }
+
+//         p {
+//           margin: 0;
+//           font-style: italic;
+//           font-family: "Sarabun", sans-serif;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @media (max-width: 768px) {
+//   .data-table-wrapper {
+//     .table-header {
+//       flex-direction: column;
+//       align-items: stretch;
+
+//       .table-actions {
+//         .search-field {
+//           width: 100%;
+//         }
+//       }
+//     }
+
+//     .table-container {
+//       overflow-x: auto;
+
+//       table {
+//         min-width: 800px;
+
+//         .address-cell {
+//           max-width: 200px;
+//         }
+
+//         .actions-column {
+//           position: sticky;
+//           right: 0;
+//           min-width: 100px;
+//           width: 100px;
+//         }
+
+//         .view-button {
+//           padding: 6px 12px;
+//           font-size: 11px;
+
+//           mat-icon {
+//             margin-right: 3px;
+//             font-size: 14px;
+//             width: 14px;
+//             height: 14px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @media print {
+//   .table-header .table-actions,
+//   .view-button {
+//     display: none !important;
+//   }
+// }
+
+// Minimal custom styles - most styling is handled by Bootstrap classes
+
+// Hover effect for sticky actions column
+.mat-row:hover .position-sticky {
+  background-color: #f8f9fa !important;
+}
+
+// Ensure Material table takes full width
+.mat-table {
+  width: 100% !important;
+}
+
+.add-button {
+  background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(13, 110, 253, 0.25);
+  transition: all 0.2s ease-in-out;
+  letter-spacing: 0.5px;
+  min-width: 140px;
+  height: 42px;
+}
+
+// Custom responsive adjustments
+@media (max-width: 768px) {
+  .d-flex.justify-content-between {
+    flex-direction: column !important;
+    align-items: stretch !important;
+
+    .d-flex.align-items-center {
+      flex-direction: column;
+      width: 100%;
+
+      button,
+      mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+
+  // Adjust sticky column on mobile
+  .position-sticky {
+    min-width: 100px !important;
+    width: 100px !important;
+  }
+
+  .btn-sm {
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+
+    mat-icon {
+      font-size: 14px !important;
+      width: 14px !important;
+      height: 14px !important;
+    }
+
+    span {
+      display: none; // Hide text on very small screens
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .d-flex.align-items-center,
+  button {
+    display: none !important;
+  }
+}

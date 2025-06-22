@@ -1,52 +1,45 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
 ###################
-# Frontend (Angular)
+# .NET Configuration Files
 ###################
 
-# Compiled output
-/frontend/dist
-/frontend/tmp
-/frontend/out-tsc
-/frontend/bazel-out
+# All appsettings variants
+appsettings.json
+appsettings.*.json
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+appsettings.Local.json
+appsettings.local.json
 
-# Node
-/frontend/node_modules
-/frontend/npm-debug.log
-/frontend/yarn-error.log
+# Custom configuration files
+appsettings.local.cs
+appsettings.*.cs
+config.json
+config.*.json
 
-# IDEs and editors
-.idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+# Connection strings and secrets
+connectionstrings.json
+secrets.json
+*.secrets.json
 
-# Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
 
-# Miscellaneous
-/frontend/.angular/cache
-/frontend/.sass-cache
-/frontend/connect.lock
-/frontend/coverage
-/frontend/libpeerconnection.log
-/frontend/testem.log
-/frontend/typings
+# User secrets
+**/secrets.json
+**/appsettings.secrets.json
 
-# System files
-.DS_Store
-Thumbs.db
+# Azure and cloud configurations
+azure.json
+aws.json
+gcp.json
 
 ###################
-# Backend (.NET)
+# Previously defined sections...
 ###################
 
 # Build results
@@ -65,26 +58,8 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
-# Visual Studio 2015/2017 cache/options directory
+# Visual Studio cache/options directory
 .vs/
-
-# MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-
-# NUnit
-*.VisualState.xml
-TestResult.xml
-nunit-*.xml
-
-# .NET Core
-project.lock.json
-project.fragment.lock.json
-artifacts/
-
-# Entity Framework
-*.dbmdl
-*.jfm
 
 # User-specific files
 *.rsuser
@@ -93,74 +68,28 @@ artifacts/
 *.userosscache
 *.sln.docstates
 
+# Database files
+*.mdf
+*.ldf
+*.ndf
+
 # NuGet Packages
 *.nupkg
 *.snupkg
 **/[Pp]ackages/*
 !**/[Pp]ackages/build/
-*.nuget.props
-*.nuget.targets
 
-# Database
-*.mdf
-*.ldf
-*.ndf
+# Entity Framework
+*.dbmdl
+*.jfm
 
-###################
-# General
-###################
+# Frontend (Angular)
+/frontend/node_modules
+/frontend/dist
+/frontend/tmp
+/frontend/out-tsc
+/frontend/.angular/cache
 
-# Environment variables
-.env
-.env.local
-.env.production
-
-# Logs
-logs
-*.log
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-*.lcov
-
-# Dependency directories
-node_modules/
-
-# Optional npm cache directory
-.npm
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# dotenv environment variables file
-.env
-
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
-
-# Temporary folders
-tmp/
-temp/
-
-###################
-# OS generated files
-###################
+# System files
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
